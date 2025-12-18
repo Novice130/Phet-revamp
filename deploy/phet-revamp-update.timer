@@ -1,0 +1,11 @@
+[Unit]
+Description=Run phet-revamp auto-update periodically
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+Persistent=true
+Unit=phet-revamp-update.service
+
+[Install]
+WantedBy=timers.target

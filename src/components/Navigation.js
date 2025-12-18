@@ -1,12 +1,14 @@
 // Navigation Component
 export default function Navigation() {
+  const baseUrl = import.meta.env.BASE_URL || "/";
+
   return `
     <nav class="navbar">
       <div class="container">
         <div class="nav-content">
-          <a href="/phet-revamp/" data-link class="nav-brand">
+          <a href="${baseUrl}" data-link class="nav-brand">
             <div class="brand-logo">
-              <img src="/assets/abraar-academy-logo.png" alt="LearnNovice" class="logo-image">
+              <img src="${baseUrl}assets/logo.png" alt="LearnNovice" class="logo-image">
             </div>
             <div class="brand-divider"></div>
             <div class="brand-text">
@@ -22,7 +24,7 @@ export default function Navigation() {
           </button>
           
           <div class="nav-links">
-            <a href="/phet-revamp/" data-link class="nav-link">Home</a>
+            <a href="${baseUrl}" data-link class="nav-link">Home</a>
             <a href="https://learnnovice.com" class="nav-link" target="_blank">LearnNovice</a>
             <a href="https://phet.colorado.edu" class="nav-link" target="_blank">PhET Official</a>
           </div>
@@ -197,20 +199,20 @@ export default function Navigation() {
 // Initialize mobile menu toggle
 export function initNavigation() {
   setTimeout(() => {
-    const toggle = document.querySelector('.mobile-menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    
+    const toggle = document.querySelector(".mobile-menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
     if (toggle && navLinks) {
-      toggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        toggle.classList.toggle('active');
+      toggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        toggle.classList.toggle("active");
       });
-      
+
       // Close menu when clicking a link
-      navLinks.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('active');
-          toggle.classList.remove('active');
+      navLinks.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+          toggle.classList.remove("active");
         });
       });
     }
