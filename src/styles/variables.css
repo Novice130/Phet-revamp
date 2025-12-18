@@ -1,0 +1,222 @@
+/* ============================================
+   CSS VARIABLES - DESIGN SYSTEM
+   ============================================ */
+
+:root {
+  /* ===== COLORS ===== */
+  
+  /* Primary Brand Colors */
+  --color-primary: hsl(210, 100%, 50%);
+  --color-primary-light: hsl(210, 100%, 65%);
+  --color-primary-dark: hsl(210, 100%, 35%);
+  
+  /* Elementary Theme - Vibrant & Playful */
+  --color-elementary-primary: hsl(340, 82%, 52%);
+  --color-elementary-secondary: hsl(45, 100%, 51%);
+  --color-elementary-accent: hsl(160, 84%, 39%);
+  --color-elementary-bg: hsl(50, 100%, 98%);
+  --color-elementary-card: hsl(0, 0%, 100%);
+  
+  /* Middle School Theme - Energetic & Engaging */
+  --color-middle-primary: hsl(265, 100%, 58%);
+  --color-middle-secondary: hsl(195, 100%, 50%);
+  --color-middle-accent: hsl(30, 100%, 50%);
+  --color-middle-bg: hsl(220, 25%, 97%);
+  --color-middle-card: hsl(0, 0%, 100%);
+  
+  /* High School Theme - Sophisticated & Modern */
+  --color-high-primary: hsl(220, 90%, 56%);
+  --color-high-secondary: hsl(280, 100%, 65%);
+  --color-high-accent: hsl(340, 100%, 55%);
+  --color-high-bg: hsl(220, 20%, 14%);
+  --color-high-card: hsl(220, 20%, 18%);
+  --color-high-text: hsl(0, 0%, 95%);
+  
+  /* Neutral Colors */
+  --color-white: hsl(0, 0%, 100%);
+  --color-black: hsl(0, 0%, 0%);
+  --color-gray-50: hsl(0, 0%, 98%);
+  --color-gray-100: hsl(0, 0%, 95%);
+  --color-gray-200: hsl(0, 0%, 90%);
+  --color-gray-300: hsl(0, 0%, 80%);
+  --color-gray-400: hsl(0, 0%, 60%);
+  --color-gray-500: hsl(0, 0%, 50%);
+  --color-gray-600: hsl(0, 0%, 40%);
+  --color-gray-700: hsl(0, 0%, 30%);
+  --color-gray-800: hsl(0, 0%, 20%);
+  --color-gray-900: hsl(0, 0%, 10%);
+  
+  /* Semantic Colors */
+  --color-success: hsl(142, 71%, 45%);
+  --color-warning: hsl(38, 92%, 50%);
+  --color-error: hsl(0, 84%, 60%);
+  --color-info: hsl(199, 89%, 48%);
+  
+  /* Gradients */
+  --gradient-elementary: linear-gradient(135deg, var(--color-elementary-primary), var(--color-elementary-secondary));
+  --gradient-middle: linear-gradient(135deg, var(--color-middle-primary), var(--color-middle-secondary));
+  --gradient-high: linear-gradient(135deg, var(--color-high-primary), var(--color-high-secondary));
+  --gradient-hero: linear-gradient(135deg, hsl(210, 100%, 50%), hsl(280, 100%, 65%));
+  
+  /* ===== TYPOGRAPHY ===== */
+  
+  /* Font Families */
+  --font-elementary: 'Fredoka', sans-serif;
+  --font-middle: 'Poppins', sans-serif;
+  --font-high: 'Inter', sans-serif;
+  --font-default: 'Inter', sans-serif;
+  
+  /* Font Sizes */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+  --font-size-6xl: 3.75rem;   /* 60px */
+  
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  /* ===== SPACING ===== */
+  
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  
+  /* ===== BORDERS ===== */
+  
+  --border-radius-sm: 0.375rem;   /* 6px */
+  --border-radius-md: 0.5rem;     /* 8px */
+  --border-radius-lg: 0.75rem;    /* 12px */
+  --border-radius-xl: 1rem;       /* 16px */
+  --border-radius-2xl: 1.5rem;    /* 24px */
+  --border-radius-full: 9999px;
+  
+  --border-width-thin: 1px;
+  --border-width-medium: 2px;
+  --border-width-thick: 4px;
+  
+  /* ===== SHADOWS ===== */
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-glow: 0 0 20px rgba(66, 153, 225, 0.5);
+  
+  /* ===== ANIMATIONS ===== */
+  
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+  
+  --animation-bounce: bounce 0.6s ease-in-out;
+  --animation-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animation-spin: spin 1s linear infinite;
+  
+  /* ===== Z-INDEX ===== */
+  
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  
+  /* ===== BREAKPOINTS (for reference in JS) ===== */
+  
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* ===== KEYFRAME ANIMATIONS ===== */
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-5%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
