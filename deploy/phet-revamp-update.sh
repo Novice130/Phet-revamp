@@ -16,10 +16,13 @@ if ! flock -n 9; then
   exit 0
 fi
 
+CLONED_FRESH=false
+
 if [ ! -d "${REPO_DIR}/.git" ]; then
   echo "Cloning ${REPO_URL} -> ${REPO_DIR}"
   rm -rf "${REPO_DIR}"/*
   git clone --depth 1 "${REPO_URL}" "${REPO_DIR}"
+  CLONED_FRESH=true
 fi
 
 cd "${REPO_DIR}"
@@ -38,7 +41,19 @@ fi
 LOCAL_SHA="$(git rev-parse HEAD)"
 REMOTE_SHA="$(git rev-parse @{u} 2>/dev/null || echo "")"
 
-if [ -n "$REMOTE_SHA" ] && [ "$LOCAL_SHA" = "$REMOTE_SHA" ]; then
+# Build/publish at least once even if SHA hasn't changed
+NEEDS_PUBLISH=false
+if [ "$CLONED_FRESH" = true ]; then
+  NEEDS_PUBLISH=true
+fi
+if [ ! -f "${REPO_DIR}/dist/index.html" ]; then
+  NEEDS_PUBLISH=true
+fi
+if [ ! -f "${WWW_DIR}/index.html" ]; then
+  NEEDS_PUBLISH=true
+fi
+
+if [ "$NEEDS_PUBLISH" = false ] && [ -n "$REMOTE_SHA" ] && [ "$LOCAL_SHA" = "$REMOTE_SHA" ]; then
   echo "No changes (HEAD=$LOCAL_SHA)."
   exit 0
 fi
