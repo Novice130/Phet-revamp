@@ -8,7 +8,8 @@ Type=oneshot
 User=root
 Group=root
 ExecStart=/usr/local/bin/phet-revamp-update
-WorkingDirectory=/
+WorkingDirectory=/opt
+Environment=HOME=/opt/phet-revamp
 
 # Hardening (keep reasonable; script needs network + filesystem)
 NoNewPrivileges=true
