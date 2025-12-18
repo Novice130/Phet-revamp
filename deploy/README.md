@@ -1,115 +1,123 @@
 # Deploy: learnnovice.com/phet-revamp (Google Cloud VM)
 
-This project is a static Vite build meant to be served at the subpath:
-
+This project is a static Vite build served at:
 - `https://learnnovice.com/phet-revamp/`
 
-The repo can self-update on a VM via a `systemd` timer that periodically pulls from GitHub, builds, and copies `dist/` into the nginx web root.
+The repo auto-updates on the VM via a `systemd` timer that periodically pulls from GitHub, builds, and copies `dist/` into the nginx web root.
 
-## 1) VM prerequisites (Debian 12)
+---
 
-Install required packages:
+## Quick Start (VM Commands)
 
-```bash
-sudo apt-get update
-sudo apt-get install -y nginx git rsync ca-certificates curl
-```
-
-Install Node.js (pick one approach):
-
-- **Recommended**: NodeSource LTS packages (gets a newer Node than Debian repo)
+### First-Time Setup
 
 ```bash
-curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-sudo apt-get install -y nodejs
-```
-
-- **Alternative**: Debian repo packages
-
-```bash
-sudo apt-get install -y nodejs npm
-```
-
-Verify:
-
-```bash
-node -v
-npm -v
-```
-
-## 2) Choose where the site will be served from
-
-This setup publishes to:
-
-- `/var/www/learnnovice/phet-revamp/`
-
-Create the parent directory:
-
-```bash
-sudo mkdir -p /var/www/learnnovice/phet-revamp
-sudo chown -R www-data:www-data /var/www/learnnovice
-```
-
-## 3) Add nginx config
-
-Copy the provided snippet:
-
-- `deploy/nginx-learnnovice-phet-revamp.conf`
-
-If you already have a `server {}` for `learnnovice.com`, just copy the `location ^~ /phet-revamp/ { ... }` block into your existing HTTPS (443) server.
-
-Reload nginx:
-
-```bash
-sudo nginx -t
-sudo systemctl reload nginx
-```
-
-## 4) Install the auto-update service + timer
-
-Clone the repo once (just to install the deploy files):
-
-```bash
-sudo mkdir -p /opt
+# 1. Clone repo
 sudo git clone https://github.com/Novice130/Phet-revamp.git /opt/phet-revamp-installer
 cd /opt/phet-revamp-installer
-```
 
-Install the updater script + systemd units:
+# 2. Create web directory
+sudo mkdir -p /var/www/learnnovice/phet-revamp
+sudo chown -R www-data:www-data /var/www/learnnovice
 
-```bash
+# 3. Install systemd units
 sudo install -m 0755 ./deploy/phet-revamp-update.sh /usr/local/bin/phet-revamp-update
-sudo install -m 0644 ./deploy/phet-revamp-update.service /etc/systemd/system/phet-revamp-update.service
-sudo install -m 0644 ./deploy/phet-revamp-update.timer /etc/systemd/system/phet-revamp-update.timer
-
+sudo install -m 0644 ./deploy/phet-revamp-update.service /etc/systemd/system/
+sudo install -m 0644 ./deploy/phet-revamp-update.timer /etc/systemd/system/
 sudo systemctl daemon-reload
-```
 
-Run once manually:
-
-```bash
+# 4. Run first build
 sudo systemctl start phet-revamp-update.service
-```
 
-Enable periodic updates:
-
-```bash
+# 5. Enable auto-updates (every 5 min)
 sudo systemctl enable --now phet-revamp-update.timer
 ```
 
-Check logs:
+### Add to Nginx
+
+Open your existing nginx config and add the PhET location block:
 
 ```bash
-sudo systemctl status phet-revamp-update.timer
-sudo journalctl -u phet-revamp-update.service -n 200 --no-pager
+sudo nano /etc/nginx/sites-available/default
 ```
+
+Add inside your `server { listen 443 ... }` block:
+
+```nginx
+    # PhET Revamp SPA
+    location ^~ /phet-revamp/ {
+        alias /var/www/learnnovice/phet-revamp/;
+        try_files $uri $uri/ /phet-revamp/index.html;
+    }
+```
+
+Test and reload:
+
+```bash
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+---
+
+## Verify Everything
+
+```bash
+# Check timer
+sudo systemctl status phet-revamp-update.timer
+
+# Check logs
+sudo journalctl -u phet-revamp-update.service -n 50
+
+# Test endpoints
+curl -I https://learnnovice.com/phet-revamp/
+```
+
+---
 
 ## Troubleshooting
 
-- If `phet-revamp-update.service` fails with `status=226/NAMESPACE` mentioning `/opt/phet-revamp`:
-	- Re-install the latest unit file from the repo (the unit should allow `/opt` as writable), then `sudo systemctl daemon-reload` and start the service again.
+### All Sites Not Working?
 
-## Notes
+Check your main nginx config has all location blocks:
 
-- The timer runs every 5 minutes and only rebuilds when the repo HEAD changes.
-- If your VM cannot access GitHub anonymously (private repo), switch to an SSH deploy key and update `REPO_URL` in `/usr/local/bin/phet-revamp-update`.
+```nginx
+server {
+    listen 443 ssl http2;
+    server_name learnnovice.com;
+    
+    root /var/www/learnnovice;
+    
+    # Main site
+    location / {
+        try_files $uri $uri/ =404;
+    }
+    
+    # CITCD-website (working)
+    location /citcd-website {
+        alias /var/www/learnnovice/citcd-website/;
+        try_files $uri $uri/ /citcd-website/index.html;
+    }
+    
+    # CITCD
+    location /citcd {
+        alias /var/www/learnnovice/citcd/;
+        try_files $uri $uri/ /citcd/index.html;
+    }
+    
+    # PhET Revamp
+    location ^~ /phet-revamp/ {
+        alias /var/www/learnnovice/phet-revamp/;
+        try_files $uri $uri/ /phet-revamp/index.html;
+    }
+}
+```
+
+### Service Fails?
+
+```bash
+sudo journalctl -u phet-revamp-update.service --no-pager
+```
+
+Common issues:
+- Node.js not installed → `curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && sudo apt-get install -y nodejs`
+- Permission denied → `sudo chown -R root:root /opt/phet-revamp`
