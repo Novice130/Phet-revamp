@@ -15,7 +15,7 @@ NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=full
 ProtectHome=true
-ReadWritePaths=/opt/phet-revamp /var/www/learnnovice /var/lock
+ReadWritePaths=/opt /var/www/learnnovice /var/lock
 
 [Install]
 WantedBy=multi-user.target

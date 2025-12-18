@@ -104,6 +104,11 @@ sudo systemctl status phet-revamp-update.timer
 sudo journalctl -u phet-revamp-update.service -n 200 --no-pager
 ```
 
+## Troubleshooting
+
+- If `phet-revamp-update.service` fails with `status=226/NAMESPACE` mentioning `/opt/phet-revamp`:
+	- Re-install the latest unit file from the repo (the unit should allow `/opt` as writable), then `sudo systemctl daemon-reload` and start the service again.
+
 ## Notes
 
 - The timer runs every 5 minutes and only rebuilds when the repo HEAD changes.
