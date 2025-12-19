@@ -16,20 +16,7 @@ export default function HomePage() {
           <div class="hero-content fade-in">
             <h1 class="hero-title">Explore Science Through Play</h1>
             <p class="hero-subtitle">Interactive PhET simulations with fun educational games for every grade level</p>
-            <div class="hero-stats">
-              <div class="stat">
-                <div class="stat-number">${simulationsData.simulations.length}</div>
-                <div class="stat-label">Simulations</div>
-              </div>
-              <div class="stat">
-                <div class="stat-number">3</div>
-                <div class="stat-label">Grade Levels</div>
-              </div>
-              <div class="stat">
-                <div class="stat-number">∞</div>
-                <div class="stat-label">Fun Learning</div>
-              </div>
-            </div>
+            <!-- Stats removed -->
           </div>
         </div>
       </section>
@@ -38,13 +25,19 @@ export default function HomePage() {
       <section class="main-content">
         <div class="container">
           <div class="content-layout">
+            <!-- Mobile Filter Toggle -->
+            <button class="mobile-filter-toggle" id="mobile-filter-toggle">
+              <span>🔍 Filters</span>
+              <span class="mobile-toggle-icon">▼</span>
+            </button>
+            
             <!-- Sidebar Filters - PhET Style -->
-            <aside class="filter-sidebar">
-              <!-- Subject Filter -->
+            <aside class="filter-sidebar" id="filter-sidebar">
+              <!-- Subject Filter (Expanded by default) -->
               <div class="filter-section">
                 <button class="filter-header" data-toggle="subject-options">
                   <span>SUBJECT</span>
-                  <span class="toggle-icon">+</span>
+                  <span class="toggle-icon">−</span>
                 </button>
                 <div class="filter-options" id="subject-options">
                   <label class="filter-checkbox">
@@ -164,7 +157,7 @@ export default function HomePage() {
                 </div>
               </div>
               
-              <!-- Compatibility Filter (Collapsed) -->
+              <!-- Compatibility Filter (Collapsed, HTML5 checked by default) -->
               <div class="filter-section collapsed">
                 <button class="filter-header" data-toggle="compat-options">
                   <span>COMPATIBILITY</span>
@@ -172,9 +165,19 @@ export default function HomePage() {
                 </button>
                 <div class="filter-options" id="compat-options">
                   <label class="filter-checkbox">
-                    <input type="checkbox" name="compat" value="html5">
+                    <input type="checkbox" name="compat" value="html5" checked>
                     <span class="checkbox-custom"></span>
                     <span>HTML5</span>
+                  </label>
+                  <label class="filter-checkbox">
+                    <input type="checkbox" name="compat" value="java">
+                    <span class="checkbox-custom"></span>
+                    <span>Java via CheerpJ</span>
+                  </label>
+                  <label class="filter-checkbox">
+                    <input type="checkbox" name="compat" value="flash">
+                    <span class="checkbox-custom"></span>
+                    <span>Flash (Not supported)</span>
                   </label>
                 </div>
               </div>
@@ -543,11 +546,49 @@ export default function HomePage() {
         min-height: 400px;
       }
       
+      /* Mobile Filter Toggle - hidden on desktop */
+      .mobile-filter-toggle {
+        display: none;
+        width: 100%;
+        padding: 12px 16px;
+        background: white;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #374151;
+        cursor: pointer;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-4);
+      }
+      
+      .mobile-filter-toggle:hover {
+        background: #f9fafb;
+      }
+      
+      .mobile-toggle-icon {
+        transition: transform 0.2s ease;
+      }
+      
+      .mobile-filter-toggle.active .mobile-toggle-icon {
+        transform: rotate(180deg);
+      }
+      
       .simulations-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: var(--space-4);
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-6);
       }
+      
+      /* Ultrawide (2560px+) - 6 columns */
+      @media (min-width: 2560px) {
+        .simulations-grid {
+          grid-template-columns: repeat(6, 1fr);
+        }
+      }
+      
+      /* Large screens (1920px) - 4 columns (default) */
       
       .no-results {
         text-align: center;
@@ -571,31 +612,42 @@ export default function HomePage() {
         color: var(--color-gray-500);
       }
       
-      /* Responsive */
-      @media (max-width: 1100px) {
+      /* Responsive - Desktop to tablet */
+      @media (max-width: 1400px) {
         .simulations-grid {
-          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          grid-template-columns: repeat(3, 1fr);
         }
       }
       
+      @media (max-width: 1100px) {
+        .simulations-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      
+      /* Mobile breakpoint */
       @media (max-width: 900px) {
         .content-layout {
           grid-template-columns: 1fr;
         }
         
-        /* Show simulations before filter on mobile */
-        .filter-sidebar {
-          position: static;
-          order: 2;
-          margin-top: var(--space-4);
+        /* Mobile filter dropdown */
+        .mobile-filter-toggle {
+          display: flex;
         }
         
-        .simulations-area {
-          order: 1;
+        .filter-sidebar {
+          position: static;
+          display: none;
+          margin-bottom: var(--space-4);
+        }
+        
+        .filter-sidebar.mobile-open {
+          display: block;
         }
         
         .simulations-grid {
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          grid-template-columns: repeat(2, 1fr);
         }
       }
       
@@ -617,7 +669,7 @@ export default function HomePage() {
         }
         
         .simulations-grid {
-          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+          grid-template-columns: repeat(2, 1fr);
           gap: var(--space-3);
         }
         
@@ -633,7 +685,7 @@ export default function HomePage() {
       
       @media (max-width: 500px) {
         .simulations-grid {
-          grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+          grid-template-columns: repeat(2, 1fr);
         }
       }
     </style>
@@ -688,7 +740,8 @@ let currentFilters = {
   search: '',
   grades: [],
   subjects: [],
-  subtopics: []
+  subtopics: [],
+  simTypes: ['html5']  // Default to HTML5
 };
 
 function renderSimulations() {
@@ -706,39 +759,41 @@ function renderSimulations() {
     const matchesGrade = currentFilters.grades.length === 0 || currentFilters.grades.includes(sim.gradeLevel);
     
     // 3. Subject/Subtopic Logic
-    // If no subjects/subtopics selected -> Match All
-    if (currentFilters.subjects.length === 0 && currentFilters.subtopics.length === 0) {
-      return matchesSearch && matchesGrade;
-    }
-    
-    let matchesSubject = false;
-    
-    // Check if Sim matches a selected Main Subject (e.g. Physics)
-    if (currentFilters.subjects.includes(sim.subject)) {
-      matchesSubject = true;
-    }
-    
-    // If not matched by main subject, check selected Subtopics
-    // This allows selecting "Motion" without selecting "Physics" (implied)
-    // Or selecting "Physics" AND "Motion" (redundant but safe)
-    if (!matchesSubject && currentFilters.subtopics.length > 0) {
-      for (const topic of currentFilters.subtopics) {
-        // Enforce parent subject match (e.g. 'motion' only matches physics sims)
-        const parentSubject = SUBTOPIC_PARENTS[topic];
-        if (parentSubject && sim.subject !== parentSubject) continue;
-        
-        // Check keywords
-        const keywords = SUBJECT_KEYWORDS[topic] || [];
-        const textToCheck = (sim.title + ' ' + sim.description).toLowerCase();
-        
-        if (keywords.some(k => textToCheck.includes(k))) {
-          matchesSubject = true;
-          break;
+    let matchesSubject = true; // Default true if no subjects selected
+
+    if (currentFilters.subjects.length > 0 || currentFilters.subtopics.length > 0) {
+      matchesSubject = false;
+      
+      // Check if Sim matches a selected Main Subject (e.g. Physics)
+      if (currentFilters.subjects.includes(sim.subject)) {
+        matchesSubject = true;
+      }
+      
+      // If not matched by main subject, check selected Subtopics
+      if (!matchesSubject && currentFilters.subtopics.length > 0) {
+        for (const topic of currentFilters.subtopics) {
+          // Enforce parent subject match
+          const parentSubject = SUBTOPIC_PARENTS[topic];
+          if (parentSubject && sim.subject !== parentSubject) continue;
+          
+          // Check keywords
+          const keywords = SUBJECT_KEYWORDS[topic] || [];
+          const textToCheck = (sim.title + ' ' + sim.description).toLowerCase();
+          
+          if (keywords.some(k => textToCheck.includes(k))) {
+            matchesSubject = true;
+            break;
+          }
         }
       }
     }
     
-    return matchesSearch && matchesGrade && matchesSubject;
+    // 4. Compatibility type filter
+    const simType = sim.simType || 'html5';  // Default to html5 if not specified
+    const matchesSimType = currentFilters.simTypes.length === 0 || 
+                           currentFilters.simTypes.includes(simType);
+    
+    return matchesSearch && matchesGrade && matchesSubject && matchesSimType;
   });
   
   // Update count
@@ -755,6 +810,16 @@ function renderSimulations() {
 }
 
 function setupFilters() {
+  // Mobile filter toggle
+  const mobileToggle = document.getElementById('mobile-filter-toggle');
+  const filterSidebar = document.getElementById('filter-sidebar');
+  if (mobileToggle && filterSidebar) {
+    mobileToggle.addEventListener('click', () => {
+      mobileToggle.classList.toggle('active');
+      filterSidebar.classList.toggle('mobile-open');
+    });
+  }
+  
   // Search input
   const searchInput = document.getElementById('search-input');
   if (searchInput) {
@@ -793,15 +858,34 @@ function setupFilters() {
     });
   });
   
+  // Compatibility type checkboxes
+  const compatCheckboxes = document.querySelectorAll('input[name="compat"]');
+  compatCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+      currentFilters.simTypes = [];
+      document.querySelectorAll('input[name="compat"]:checked').forEach(cb => {
+        currentFilters.simTypes.push(cb.value);
+      });
+      renderSimulations();
+    });
+  });
+  
   // Clear filters button
   const clearBtn = document.getElementById('clear-filters');
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
-      // Uncheck all checkboxes
-      document.querySelectorAll('.filter-checkbox input').forEach(cb => cb.checked = false);
+      // Uncheck all checkboxes except HTML5
+      document.querySelectorAll('.filter-checkbox input').forEach(cb => {
+        if (cb.value === 'html5') {
+          cb.checked = true;
+        } else {
+          cb.checked = false;
+        }
+      });
       currentFilters.grades = [];
       currentFilters.subjects = [];
       currentFilters.subtopics = [];
+      currentFilters.simTypes = ['html5'];  // Reset to default
       currentFilters.search = '';
       if (searchInput) searchInput.value = '';
       renderSimulations();

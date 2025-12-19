@@ -24,7 +24,6 @@ export default function SimulationCard(simulation) {
       <div class="card-body">
         <div class="card-header">
           <span class="subject-icon">${subjectIcon}</span>
-          <span class="badge ${gradeLevelClass}">${gradeLevelText}</span>
         </div>
         <h3 class="card-title">${simulation.title}</h3>
         <p class="card-description">${simulation.description}</p>
@@ -46,7 +45,7 @@ export default function SimulationCard(simulation) {
       .card-image {
         position: relative;
         width: 100%;
-        height: 140px;
+        height: 180px;
         overflow: hidden;
         border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
       }

@@ -1,0 +1,352 @@
+{
+  "acids_bases": [
+    {
+      "title": "Stomach antacids",
+      "overlayText": "Antacids neutralize excess stomach acid, raising pH and reducing irritation.",
+      "assetPath": "assets/real-life/acids_bases/stomach-antacids.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Antacid"
+    },
+    {
+      "title": "Pool and aquarium chemistry",
+      "overlayText": "Keeping pH in a safe range protects skin/eyes and helps disinfectants work effectively.",
+      "assetPath": "assets/real-life/acids_bases/pool-and-aquarium-chemistry.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Swimming_pool"
+    }
+  ],
+  "area": [
+    {
+      "title": "Flooring a room",
+      "overlayText": "Area helps estimate how much tile or carpet you need to cover a floor.",
+      "assetPath": "assets/real-life/area/flooring-a-room.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Carpet"
+    },
+    {
+      "title": "Painting a wall",
+      "overlayText": "Surface area determines how much paint is needed for a wall or fence.",
+      "assetPath": "assets/real-life/area/painting-a-wall.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Home_improvement"
+    }
+  ],
+  "algebra_area_model": [
+    {
+      "title": "Box method for multiplication",
+      "overlayText": "Area models help multiply large numbers by splitting into parts and adding partial products.",
+      "assetPath": "assets/real-life/algebra_area_model/box-method-for-multiplication.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Notebook"
+    },
+    {
+      "title": "Designing layouts and budgets",
+      "overlayText": "Breaking a big problem into smaller rectangles mirrors breaking a cost or layout into parts.",
+      "assetPath": "assets/real-life/algebra_area_model/designing-layouts-and-budgets.svg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Designing_layouts_and_budgets"
+    }
+  ],
+  "electric_circuits": [
+    {
+      "title": "House wiring",
+      "overlayText": "Homes use parallel circuits so devices can run independently at the same voltage.",
+      "assetPath": "assets/real-life/electric_circuits/house-wiring.svg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/House_wiring"
+    },
+    {
+      "title": "Phone chargers",
+      "overlayText": "Chargers regulate voltage and current to safely deliver power to batteries.",
+      "assetPath": "assets/real-life/electric_circuits/phone-chargers.svg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Phone_chargers"
+    }
+  ],
+  "forces_motion": [
+    {
+      "title": "Seatbelts and inertia",
+      "overlayText": "Seatbelts provide the force needed to change your motion during sudden stops.",
+      "assetPath": "assets/real-life/forces_motion/seatbelts-and-inertia.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Seat_belt"
+    },
+    {
+      "title": "Pushing a shopping cart",
+      "overlayText": "More net force produces more acceleration; heavier carts accelerate less for the same push.",
+      "assetPath": "assets/real-life/forces_motion/pushing-a-shopping-cart.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Shopping_cart"
+    }
+  ],
+  "friction": [
+    {
+      "title": "Car braking on a wet road",
+      "overlayText": "Friction between tires and road is why cars can brake and turn without skidding—low friction increases stopping distance.",
+      "assetPath": "assets/real-life/friction/car-braking-on-a-wet-road.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Car"
+    },
+    {
+      "title": "Shoes gripping the ground",
+      "overlayText": "Shoe friction prevents slipping while walking or running, especially on smooth surfaces.",
+      "assetPath": "assets/real-life/friction/shoes-gripping-the-ground.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Sidewalk"
+    }
+  ],
+  "waves_sound": [
+    {
+      "title": "Musical instruments",
+      "overlayText": "Instrument pitch changes with frequency; louder sound corresponds to larger amplitude.",
+      "assetPath": "assets/real-life/waves_sound/musical-instruments.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Musical_instrument"
+    },
+    {
+      "title": "Medical ultrasound",
+      "overlayText": "Ultrasound uses high-frequency waves to create images inside the body.",
+      "assetPath": "assets/real-life/waves_sound/medical-ultrasound.JPG",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Medical_ultrasound"
+    }
+  ],
+  "density_buoyancy": [
+    {
+      "title": "Ships floating",
+      "overlayText": "Ships float because average density (including air inside) is less than water; buoyancy balances weight.",
+      "assetPath": "assets/real-life/density_buoyancy/ships-floating.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Cargo_ship"
+    },
+    {
+      "title": "Hot-air balloons",
+      "overlayText": "Lower-density hot air creates an upward buoyant force, allowing balloons to rise.",
+      "assetPath": "assets/real-life/density_buoyancy/hot-air-balloons.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Hot_air_balloon"
+    }
+  ],
+  "energy": [
+    {
+      "title": "Roller coasters",
+      "overlayText": "Potential energy at the top converts to kinetic energy as the coaster speeds up downhill.",
+      "assetPath": "assets/real-life/energy/roller-coasters.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Roller_coaster"
+    },
+    {
+      "title": "Hydroelectric power",
+      "overlayText": "Water’s gravitational potential energy converts to electrical energy through turbines.",
+      "assetPath": "assets/real-life/energy/hydroelectric-power.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Turbine"
+    }
+  ],
+  "electric_fields_static": [
+    {
+      "title": "Static cling (clothes, balloons)",
+      "overlayText": "Static electricity makes light objects stick after charges build up (like balloons on hair).",
+      "assetPath": "assets/real-life/electric_fields_static/static-cling-clothes-balloons.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Balloon"
+    },
+    {
+      "title": "Lightning",
+      "overlayText": "Charge separation in storm clouds can create huge electric fields that discharge as lightning.",
+      "assetPath": "assets/real-life/electric_fields_static/lightning.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Lightning"
+    }
+  ],
+  "electromagnetism": [
+    {
+      "title": "Power generators",
+      "overlayText": "Generators convert mechanical motion into electrical energy by changing magnetic flux through coils.",
+      "assetPath": "assets/real-life/electromagnetism/power-generators.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Electric_generator"
+    },
+    {
+      "title": "Induction cooktops",
+      "overlayText": "Induction uses changing magnetic fields to create currents that heat cookware efficiently.",
+      "assetPath": "assets/real-life/electromagnetism/induction-cooktops.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Cooking"
+    }
+  ],
+  "light_optics": [
+    {
+      "title": "Eyeglasses and contact lenses",
+      "overlayText": "Lenses bend (refract) light to focus images sharply on the retina.",
+      "assetPath": "assets/real-life/light_optics/eyeglasses-and-contact-lenses.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Optometry"
+    },
+    {
+      "title": "Camera lenses",
+      "overlayText": "Cameras use lenses to form focused images on a sensor, similar to how eyes focus on the retina.",
+      "assetPath": "assets/real-life/light_optics/camera-lenses.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Camera_lens"
+    }
+  ],
+  "chemistry_reactions": [
+    {
+      "title": "Combustion (fuel burning)",
+      "overlayText": "Balanced equations help predict how much oxygen is needed and how much CO₂ and H₂O are produced.",
+      "assetPath": "assets/real-life/chemistry_reactions/combustion-fuel-burning.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Flame"
+    },
+    {
+      "title": "Rusting of iron",
+      "overlayText": "Rust forms when iron reacts with oxygen and water; equations describe the transformation of matter.",
+      "assetPath": "assets/real-life/chemistry_reactions/rusting-of-iron.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Rust"
+    }
+  ],
+  "solutions_concentration": [
+    {
+      "title": "Medical blood tests",
+      "overlayText": "Labs estimate concentrations of substances by measuring light absorption and comparing to standards.",
+      "assetPath": "assets/real-life/solutions_concentration/medical-blood-tests.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Blood_test"
+    },
+    {
+      "title": "Water treatment",
+      "overlayText": "Concentration calculations help set safe disinfectant and contaminant levels in drinking water.",
+      "assetPath": "assets/real-life/solutions_concentration/water-treatment.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Water_treatment"
+    }
+  ],
+  "gases": [
+    {
+      "title": "Car tires and pressure",
+      "overlayText": "Tire pressure changes with temperature; proper pressure improves safety and efficiency.",
+      "assetPath": "assets/real-life/gases/car-tires-and-pressure.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Mechanic"
+    },
+    {
+      "title": "Scuba diving",
+      "overlayText": "Divers must consider pressure changes with depth to avoid rapid expansion of gases.",
+      "assetPath": "assets/real-life/gases/scuba-diving.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Scuba_diving"
+    }
+  ],
+  "fractions": [
+    {
+      "title": "Cooking and recipes",
+      "overlayText": "Recipes use fractions for ingredient amounts; scaling recipes uses equivalent fractions and multiplication.",
+      "assetPath": "assets/real-life/fractions/cooking-and-recipes.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Cooking"
+    },
+    {
+      "title": "Construction measurements",
+      "overlayText": "Rulers and tape measures often use fractional inches; accuracy depends on reading fractions correctly.",
+      "assetPath": "assets/real-life/fractions/construction-measurements.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Construction"
+    }
+  ],
+  "functions_graphing": [
+    {
+      "title": "Business growth charts",
+      "overlayText": "Graphs show trends like revenue over time; slope tells how fast something is changing.",
+      "assetPath": "assets/real-life/functions_graphing/business-growth-charts.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Business_career_of_Donald_Trump"
+    },
+    {
+      "title": "Motion tracking",
+      "overlayText": "Position–time graphs show motion; slope represents velocity (rate of change of position).",
+      "assetPath": "assets/real-life/functions_graphing/motion-tracking.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Running"
+    }
+  ],
+  "statistics": [
+    {
+      "title": "Class test scores",
+      "overlayText": "Mean and median help summarize performance; variability shows how spread out scores are.",
+      "assetPath": "assets/real-life/statistics/class-test-scores.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Student"
+    },
+    {
+      "title": "Weather data",
+      "overlayText": "Average temperature and variability help describe climate patterns and unusual days.",
+      "assetPath": "assets/real-life/statistics/weather-data.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Weather_radar"
+    }
+  ],
+  "climate_greenhouse": [
+    {
+      "title": "Earth’s surface warming",
+      "overlayText": "Greenhouse gases help keep Earth warm by trapping some outgoing infrared radiation.",
+      "assetPath": "assets/real-life/climate_greenhouse/earths-surface-warming.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Atmosphere"
+    },
+    {
+      "title": "Greenhouses for plants",
+      "overlayText": "Real greenhouses stay warmer by reducing heat loss and trapping warm air and radiation.",
+      "assetPath": "assets/real-life/climate_greenhouse/greenhouses-for-plants.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Greenhouse"
+    }
+  ],
+  "springs_hookes": [
+    {
+      "title": "Car suspension",
+      "overlayText": "Springs and shock absorbers smooth bumps by storing and dissipating energy.",
+      "assetPath": "assets/real-life/springs_hookes/car-suspension.png",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Car_suspension"
+    },
+    {
+      "title": "Spring scales",
+      "overlayText": "A spring scale measures force by how much a spring stretches.",
+      "assetPath": "assets/real-life/springs_hookes/spring-scales.JPG",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Measurement"
+    }
+  ],
+  "torque_balance": [
+    {
+      "title": "Seesaws",
+      "overlayText": "A seesaw balances when torques on both sides match; moving farther from the pivot increases torque.",
+      "assetPath": "assets/real-life/torque_balance/seesaws.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Seesaw"
+    },
+    {
+      "title": "Wrenches and door handles",
+      "overlayText": "Longer handles produce more torque, making it easier to loosen bolts or open heavy doors.",
+      "assetPath": "assets/real-life/torque_balance/wrenches-and-door-handles.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Wrench"
+    }
+  ],
+  "gravity_orbits": [
+    {
+      "title": "Satellites and GPS",
+      "overlayText": "Satellites stay in orbit when forward speed and gravity balance to provide centripetal acceleration.",
+      "assetPath": "assets/real-life/gravity_orbits/satellites-and-gps.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Satellite"
+    },
+    {
+      "title": "Planetary motion",
+      "overlayText": "Planets orbit stars due to gravity; orbital period depends on distance and central mass.",
+      "assetPath": "assets/real-life/gravity_orbits/planetary-motion.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Planet"
+    }
+  ],
+  "diffusion": [
+    {
+      "title": "Perfume spreading in a room",
+      "overlayText": "Odor molecules diffuse through air from high concentration near the source to lower concentration elsewhere.",
+      "assetPath": "assets/real-life/diffusion/perfume-spreading-in-a-room.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Room"
+    },
+    {
+      "title": "Oxygen exchange in lungs",
+      "overlayText": "Oxygen diffuses from alveoli into blood due to concentration gradients.",
+      "assetPath": "assets/real-life/diffusion/oxygen-exchange-in-lungs.png",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Lung"
+    }
+  ],
+  "quantum_radiation": [
+    {
+      "title": "Infrared cameras",
+      "overlayText": "Thermal cameras detect infrared radiation emitted by warm objects.",
+      "assetPath": "assets/real-life/quantum_radiation/infrared-cameras.png",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Infrared"
+    },
+    {
+      "title": "Stars and color",
+      "overlayText": "Hotter stars peak at shorter wavelengths (bluer); cooler stars peak at longer wavelengths (redder).",
+      "assetPath": "assets/real-life/quantum_radiation/stars-and-color.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Night_sky"
+    }
+  ],
+  "general_science": [
+    {
+      "title": "Engineering prototypes",
+      "overlayText": "Simulations help test ideas quickly before building real prototypes.",
+      "assetPath": "assets/real-life/general_science/engineering-prototypes.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Engineering"
+    },
+    {
+      "title": "Science experiments",
+      "overlayText": "Controlling variables is key to understanding cause and effect in experiments.",
+      "assetPath": "assets/real-life/general_science/science-experiments.jpg",
+      "sourcePageUrl": "https://en.wikipedia.org/wiki/Experiment"
+    }
+  ]
+}

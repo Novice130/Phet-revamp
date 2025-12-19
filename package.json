@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "test:blackbox": "playwright test",
+    "test": "playwright test",
     "deploy:update": "bash deploy/phet-revamp-update.sh"
   },
   "repository": {
@@ -22,6 +24,7 @@
   },
   "homepage": "https://github.com/Novice130/Phet-revamp#readme",
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "vite": "^7.3.0"
   }
 }

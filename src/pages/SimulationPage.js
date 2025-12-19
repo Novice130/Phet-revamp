@@ -1,27 +1,38 @@
 // Simulation Page Component
-import Navigation, { initNavigation } from '../components/Navigation.js';
-import WordleGame, { initWordleGame } from '../components/games/WordleGame.js';
-import MiddleSchoolQuiz, { initMiddleSchoolQuiz } from '../components/games/MiddleSchoolQuiz.js';
-import ElementaryMatch, { initElementaryMatch } from '../components/games/ElementaryMatch.js';
-import ConceptSnakeGame, { initConceptSnakeGame } from '../components/games/ConceptSnake.js';
-import BalloonPopGame, { initBalloonPopGame } from '../components/games/BalloonPop.js';
-import GameSelector from '../components/GameSelector.js';
-import SimulationOverlay, { initSimulationOverlay } from '../components/SimulationOverlay.js';
-import simulationsData from '../data/simulations.json';
+import Navigation, { initNavigation } from "../components/Navigation.js";
+import KnowledgeQuiz, {
+  initKnowledgeQuiz,
+} from "../components/games/KnowledgeQuiz.js";
+import SimulationOverlay, {
+  initSimulationOverlay,
+} from "../components/SimulationOverlay.js";
+import simulationsData from "../data/simulations.json";
+import { enrichSimulation } from "../utils/simulationContent.js";
 
 export default function SimulationPage(params) {
-  const simulation = simulationsData.simulations.find(s => s.id === params.id);
-  
+  const rawSimulation = simulationsData.simulations.find(
+    (s) => s.id === params.id
+  );
+  const simulation = rawSimulation ? enrichSimulation(rawSimulation) : null;
+
+  const placeholderImageUrl = `${
+    import.meta.env.BASE_URL
+  }assets/real-life/placeholder.svg`;
+
   if (!simulation) {
-    window.location.href = '/phet-revamp/404';
+    window.location.href = "/phet-revamp/404";
     return;
   }
-  
-  const app = document.getElementById('app');
+
+  const app = document.getElementById("app");
   const themeClass = `theme-${simulation.gradeLevel}`;
-  const gradeLevelText = simulation.gradeLevel === 'elementary' ? 'Elementary School' :
-                         simulation.gradeLevel === 'middle' ? 'Middle School' : 'High School';
-  
+  const gradeLevelText =
+    simulation.gradeLevel === "elementary"
+      ? "Elementary School"
+      : simulation.gradeLevel === "middle"
+      ? "Middle School"
+      : "High School";
+
   app.innerHTML = `
     ${Navigation()}
     
@@ -41,7 +52,9 @@ export default function SimulationPage(params) {
       <section class="sim-header">
         <div class="container">
           <div class="header-content fade-in">
-            <span class="badge badge-${simulation.gradeLevel}">${gradeLevelText}</span>
+            <span class="badge badge-${
+              simulation.gradeLevel
+            }">${gradeLevelText}</span>
             <h1 class="sim-title">${simulation.title}</h1>
             <p class="sim-description">${simulation.description}</p>
           </div>
@@ -52,7 +65,12 @@ export default function SimulationPage(params) {
       <section class="simulation-section">
         <div class="container">
           <div class="simulation-container">
-            ${SimulationOverlay(simulation.phetUrl, simulation.id, simulation.thumbnail)}
+            ${SimulationOverlay(
+              simulation.phetUrl,
+              simulation.id,
+              simulation.thumbnail,
+              simulation.simType
+            )}
           </div>
           <p class="sim-credit">
             Simulation powered by <a href="https://phet.colorado.edu" target="_blank">PhET Interactive Simulations</a>, 
@@ -66,51 +84,121 @@ export default function SimulationPage(params) {
         <div class="container">
           <h2 class="section-title">📚 What You'll Learn</h2>
           <ul class="objectives-list">
-            ${simulation.objectives.map(obj => `
+            ${(simulation.whatYoullLearn || simulation.objectives || [])
+              .map(
+                (obj) => `
               <li class="objective-item slide-in-right">${obj}</li>
-            `).join('')}
+            `
+              )
+              .join("")}
           </ul>
         </div>
+        </div>
       </section>
+
+      <!-- Key Formulas Section -->
+      ${
+        simulation.formulas && simulation.formulas.length > 0
+          ? `
+      <section class="formulas-section">
+        <div class="container">
+          <h2 class="section-title">📐 Key Formulas</h2>
+          <div class="formulas-grid">
+            ${simulation.formulas
+              .map(
+                (formula) => `
+              <div class="formula-card slide-in-right">
+                <span class="formula-text">${formula}</span>
+              </div>
+            `
+              )
+              .join("")}
+          </div>
+        </div>
+      </section>
+      `
+          : ""
+      }
       
       <!-- Real Life Examples -->
       <section class="examples-section">
         <div class="container">
           <h2 class="section-title">🌍 Real Life Examples</h2>
           <div class="examples-grid">
-            ${simulation.realLifeExamples.map((example, i) => `
-              <div class="example-card scale-in" style="animation-delay: ${i * 0.1}s">
-                <div class="example-icon">${['🔬', '🌟', '⚡'][i] || '💡'}</div>
-                <h3 class="example-title">${example.title}</h3>
-                <p class="example-description">${example.description}</p>
+            ${(simulation.realLifeExamples || [])
+              .slice(0, 2)
+              .map(
+                (example, i) => `
+              <div class="example-card scale-in" style="animation-delay: ${
+                i * 0.1
+              }s">
+                <div class="example-image-container">
+                  <img src="${example.imageUrl || placeholderImageUrl}" alt="${
+                  example.title
+                }" class="example-image" loading="lazy"
+                  >
+                  <div class="example-overlay">
+                    <p class="example-overlay-text">${
+                      example.overlayText || example.description || ""
+                    }</p>
+                    ${
+                      example.imageAttributionUrl
+                        ? `
+                      <a class="example-attribution" href="${
+                        example.imageAttributionUrl
+                      }" target="_blank" rel="noopener noreferrer">${
+                            example.imageAttributionText || "Image source"
+                          }</a>
+                    `
+                        : ""
+                    }
+                  </div>
+                </div>
+                <div class="example-content">
+                  <h3 class="example-title">${example.title}</h3>
+                </div>
               </div>
-            `).join('')}
+            `
+              )
+              .join("")}
           </div>
         </div>
       </section>
+
+      ${
+        simulation.learningResources && simulation.learningResources.length > 0
+          ? `
+      <section class="resources-section">
+        <div class="container">
+          <h2 class="section-title">🔗 More Learning Resources</h2>
+          <ul class="resources-list">
+            ${simulation.learningResources
+              .map(
+                (resource) => `
+              <li class="resource-item slide-in-right">
+                <a href="${resource.url}" target="_blank" rel="noopener noreferrer">${resource.label}</a>
+              </li>
+            `
+              )
+              .join("")}
+          </ul>
+        </div>
+      </section>
+      `
+          : ""
+      }
       
       <!-- Game Section -->
       <section class="game-section" id="game-section">
         <div class="container">
           <h2 class="section-title">🎮 Test Your Knowledge!</h2>
-          <p class="game-intro">Ready to practice what you learned? Choose a game!</p>
-          
-          <div class="game-selector-buttons">
-            ${renderGameButtons(simulation)}
-          </div>
+          <p class="game-intro">Answer a few questions to check your understanding.</p>
           
           <div class="game-container" id="game-container-${simulation.id}">
-            ${renderGame(simulation, 'default')}
+            ${renderGame(simulation)}
           </div>
         </div>
       </section>
-      
-      <!-- Scroll to Game Button -->
-      <div class="scroll-to-game">
-        <button class="btn btn-${simulation.gradeLevel} btn-lg" id="scroll-to-game">
-          Play the Game! 🎮
-        </button>
-      </div>
     </main>
     
     <style>
@@ -263,6 +351,7 @@ export default function SimulationPage(params) {
       
       /* Section Styles */
       .objectives-section,
+      .resources-section,
       .examples-section,
       .game-section {
         padding: var(--space-12) 0;
@@ -362,70 +451,40 @@ export default function SimulationPage(params) {
         color: var(--color-gray-300);
       }
       
-      /* Game Selector Buttons */
-      .game-selector-buttons {
-        display: flex;
-        justify-content: center;
-        gap: var(--space-4);
-        margin-bottom: var(--space-8);
-        flex-wrap: wrap;
-      }
-      
-      .game-select-btn {
-        display: flex;
-        align-items: center;
-        gap: var(--space-2);
-        padding: var(--space-3) var(--space-6);
-        background: white;
-        border: 3px solid var(--color-gray-300);
-        border-radius: var(--border-radius-xl);
-        cursor: pointer;
-        transition: all var(--transition-base);
-        font-size: var(--font-size-base);
-        font-weight: var(--font-weight-semibold);
-      }
-      
-      .theme-high .game-select-btn {
-        background: var(--color-high-card);
-        color: var(--color-high-text);
-      }
-      
-      .game-select-btn:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-lg);
-        border-color: var(--theme-primary);
-      }
-      
-      .game-select-btn.active {
-        background: var(--theme-primary);
-        color: white;
-        border-color: var(--theme-primary);
-      }
-      
-      .btn-icon {
-        font-size: var(--font-size-2xl);
-      }
-      
-      .btn-name {
-        font-family: var(--font-middle);
-      }
-      
       .game-container {
         max-width: 900px;
         margin: 0 auto;
       }
-      
-      /* Scroll to Game Button */
-      .scroll-to-game {
-        position: fixed;
-        bottom: var(--space-8);
-        right: var(--space-8);
-        z-index: var(--z-fixed);
-        animation: bounce 2s ease-in-out infinite;
+
+      /* Resources */
+      .resources-list {
+        max-width: 900px;
+        margin: 0 auto;
+        list-style: none;
+        padding: 0;
+        display: grid;
+        gap: var(--space-3);
       }
-      
-      .scroll-to-game button {
-        box-shadow: var(--shadow-2xl);
+
+      .resource-item {
+        background: white;
+        border: 2px solid var(--color-gray-200);
+        border-radius: var(--border-radius-xl);
+        padding: var(--space-4);
+      }
+
+      .theme-high .resource-item {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .resource-item a {
+        color: var(--theme-primary);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .theme-high .resource-item a {
+        color: rgba(255, 255, 255, 0.9);
       }
       
       /* Responsive */
@@ -442,142 +501,116 @@ export default function SimulationPage(params) {
           grid-template-columns: 1fr;
         }
         
-        .scroll-to-game {
-          bottom: var(--space-4);
-          right: var(--space-4);
-        }
       }
+        .formulas-section {
+          background: white;
+          padding: var(--space-8) 0;
+        }
+        
+        .formulas-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--space-4);
+          justify-content: center;
+        }
+        
+        .formula-card {
+          background: var(--theme-bg);
+          padding: var(--space-4) var(--space-8);
+          border-radius: var(--border-radius-lg);
+          font-family: 'Courier New', monospace;
+          font-weight: bold;
+          font-size: var(--font-size-xl);
+          border: 2px solid var(--theme-primary);
+          box-shadow: var(--shadow-sm);
+        }
+
+        .example-image-container {
+          position: relative;
+          width: 100%;
+          height: 200px;
+          border-radius: var(--border-radius-lg);
+          overflow: hidden;
+          margin-bottom: var(--space-4);
+        }
+        
+        .example-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform var(--transition-slow);
+        }
+        
+        .example-card:hover .example-image {
+          transform: scale(1.1);
+        }
+        
+        .example-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.05));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 1;
+          transition: opacity var(--transition-base);
+          padding: var(--space-4);
+          flex-direction: column;
+          gap: var(--space-3);
+        }
+        
+        .example-card:hover .example-overlay {
+          opacity: 1;
+        }
+        
+        .example-overlay-text {
+          color: white;
+          text-align: center;
+          font-size: var(--font-size-lg);
+          font-weight: 600;
+          line-height: var(--line-height-relaxed);
+        }
+
+        .example-attribution {
+          color: rgba(255, 255, 255, 0.9);
+          font-size: var(--font-size-xs);
+          text-decoration: underline;
+        }
     </style>
   `;
-  
+
   // Initialize navigation
   initNavigation();
-  
+
   // Initialize simulation overlay
-  const overlayContainer = document.querySelector('.sim-overlay-container');
+  const overlayContainer = document.querySelector(".sim-overlay-container");
   if (overlayContainer) {
     const overlayId = overlayContainer.id;
     initSimulationOverlay(overlayId);
   }
-  
+
   // Initialize the game after a short delay to ensure DOM is ready
   setTimeout(() => {
     initializeGame(simulation);
-    setupGameSelector(simulation);
   }, 100);
-  
-  // Scroll to game button
-  const scrollBtn = document.getElementById('scroll-to-game');
-  if (scrollBtn) {
-    scrollBtn.addEventListener('click', () => {
-      document.getElementById('game-section').scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    });
-  }
 }
 
-function renderGameButtons(simulation) {
-  const buttons = {
-    elementary: [
-      { type: 'matching', icon: '🎨', name: 'Matching' },
-      { type: 'balloon', icon: '🎈', name: 'Balloon Pop' }
-    ],
-    middle: [
-      { type: 'quiz', icon: '🎮', name: 'Quiz' }
-    ],
-    high: [
-      { type: 'wordle', icon: '🎯', name: 'Wordle' },
-      { type: 'snake', icon: '🐍', name: 'Snake' }
-    ]
-  };
-  
-  const gameButtons = buttons[simulation.gradeLevel] || buttons.high;
-  
-  return gameButtons.map((btn, index) => `
-    <button class="game-select-btn ${index === 0 ? 'active' : ''}" data-game-type="${btn.type}" data-sim-id="${simulation.id}">
-      <span class="btn-icon">${btn.icon}</span>
-      <span class="btn-name">${btn.name}</span>
-    </button>
-  `).join('');
-}
-
-function renderGame(simulation, gameType = 'default') {
-  // Use default game type if not specified
-  if (gameType === 'default') {
-    gameType = simulation.gameType;
-  }
-  
-  switch (gameType) {
-    case 'wordle':
-      return WordleGame(simulation.wordleWords, simulation);
-    case 'quiz':
-      return MiddleSchoolQuiz(simulation.gameQuestions);
-    case 'matching':
-      return ElementaryMatch(simulation.gameVocabulary);
-    case 'snake':
-      return ConceptSnakeGame(simulation.wordleWords || simulation.gameVocabulary, simulation);
-    case 'balloon':
-      return BalloonPopGame(simulation.gameVocabulary);
-    default:
-      return '<p>Game coming soon!</p>';
-  }
+function renderGame(simulation) {
+  return KnowledgeQuiz(simulation);
 }
 
 function initializeGame(simulation, gameType = null) {
-  // Use default game type if not specified
-  if (!gameType) {
-    gameType = simulation.gameType;
-  }
-  
   // Find the game container
-  const gameContainer = document.querySelector(`#game-container-${simulation.id} > div`);
+  const gameContainer = document.querySelector(
+    `#game-container-${simulation.id} > div`
+  );
   if (!gameContainer) return;
-  
+
   const gameId = gameContainer.id;
-  
-  switch (gameType) {
-    case 'wordle':
-      initWordleGame(gameId, simulation.wordleWords);
-      break;
-    case 'quiz':
-      initMiddleSchoolQuiz(gameId, simulation.gameQuestions);
-      break;
-    case 'matching':
-      initElementaryMatch(gameId, simulation.gameVocabulary);
-      break;
-    case 'snake':
-      initConceptSnakeGame(gameId, simulation.wordleWords || simulation.gameVocabulary, simulation);
-      break;
-    case 'balloon':
-      initBalloonPopGame(gameId, simulation.gameVocabulary);
-      break;
-  }
+  initKnowledgeQuiz(
+    gameId,
+    simulation.gameQuestions,
+    simulation.gradeLevel,
+    simulation.id
+  );
 }
-
-// Handle game selector button clicks
-function setupGameSelector(simulation) {
-  const buttons = document.querySelectorAll('.game-select-btn');
-  const gameContainer = document.getElementById(`game-container-${simulation.id}`);
-  
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Update active state
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      
-      // Get selected game type
-      const gameType = btn.dataset.gameType;
-      
-      // Re-render game
-      gameContainer.innerHTML = renderGame(simulation, gameType);
-      
-      // Re-initialize game
-      setTimeout(() => {
-        initializeGame(simulation, gameType);
-      }, 100);
-    });
-  });
-}
-

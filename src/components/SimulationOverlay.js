@@ -1,25 +1,29 @@
 // Simulation Overlay Component - Run or Fullscreen options
-export default function SimulationOverlay(simulationUrl, simulationId, thumbnailUrl) {
+export default function SimulationOverlay(simulationUrl, simulationId, thumbnailUrl, simType = 'html5') {
   const overlayId = 'overlay-' + Math.random().toString(36).substr(2, 9);
   
-  return `
+      const isJava = simType === 'java';
+      
+      return `
     <div class="sim-overlay-container" id="${overlayId}" style="background-image: url('${thumbnailUrl}'); background-size: cover; background-position: center;">
       <div class="sim-overlay" id="${overlayId}-overlay">
         <div class="overlay-content">
           <div class="overlay-icon">🎮</div>
-          <h3>Ready to Explore?</h3>
-          <p>Choose how you'd like to run this simulation</p>
+          <h3>${isJava ? 'Java Simulation' : 'Ready to Explore?'}</h3>
+          <p>${isJava ? 'This simulation runs with CheerpJ technology.' : "Choose how you'd like to run this simulation"}</p>
           <div class="overlay-buttons">
             <button class="overlay-btn btn-run" id="${overlayId}-run">
               <span class="btn-icon">▶️</span>
-              <span class="btn-text">Run Here</span>
-              <span class="btn-desc">Play in current view</span>
+              <span class="btn-text">${isJava ? 'Launch with CheerpJ' : 'Run Here'}</span>
+              <span class="btn-desc">${isJava ? 'May take a moment to load' : 'Play in current view'}</span>
             </button>
+            ${!isJava ? `
             <button class="overlay-btn btn-fullscreen" id="${overlayId}-fullscreen">
               <span class="btn-icon">⛶</span>
               <span class="btn-text">Fullscreen</span>
               <span class="btn-desc">Immersive experience</span>
             </button>
+            ` : ''}
           </div>
         </div>
       </div>
@@ -185,25 +189,27 @@ export function initSimulationOverlay(overlayId) {
     iframe.classList.remove('hidden');
   });
   
-  fullscreenBtn.addEventListener('click', () => {
-    // Load simulation and go fullscreen
-    iframe.src = iframe.dataset.src;
-    overlay.classList.add('hidden');
-    iframe.classList.remove('hidden');
-    
-    // Request fullscreen
-    setTimeout(() => {
-      if (iframe.requestFullscreen) {
-        iframe.requestFullscreen();
-      } else if (iframe.webkitRequestFullscreen) {
-        iframe.webkitRequestFullscreen();
-      } else if (iframe.mozRequestFullScreen) {
-        iframe.mozRequestFullScreen();
-      } else if (iframe.msRequestFullscreen) {
-        iframe.msRequestFullscreen();
-      }
-    }, 500);
-  });
+  if (fullscreenBtn) {
+    fullscreenBtn.addEventListener('click', () => {
+      // Load simulation and go fullscreen
+      iframe.src = iframe.dataset.src;
+      overlay.classList.add('hidden');
+      iframe.classList.remove('hidden');
+      
+      // Request fullscreen
+      setTimeout(() => {
+        if (iframe.requestFullscreen) {
+          iframe.requestFullscreen();
+        } else if (iframe.webkitRequestFullscreen) {
+          iframe.webkitRequestFullscreen();
+        } else if (iframe.mozRequestFullScreen) {
+          iframe.mozRequestFullScreen();
+        } else if (iframe.msRequestFullscreen) {
+          iframe.msRequestFullscreen();
+        }
+      }, 500);
+    });
+  }
 }
 
 export { SimulationOverlay };
