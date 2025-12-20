@@ -800,8 +800,8 @@ const SUBJECT_KEYWORDS = {
   'electricity': ['circuit', 'voltage', 'current', 'magnet', 'charge', 'field', 'faraday', 'ohm', 'capacitor', 'wire', 'battery'],
   
   // Math Sub-categories
-  'math-concepts': ['fraction', 'area', 'perimeter', 'quad', 'line', 'plot', 'graph', 'ratio', 'proportion', 'mean', 'median'],
-  'math-applications': ['projectile', 'vector', 'calculus', 'probability', 'plinko'],
+  'math-concepts': ['fraction', 'area', 'perimeter', 'quad', 'line', 'plot', 'graph', 'ratio', 'proportion', 'mean', 'median', 'number', 'integer', 'decimal', 'multiplication', 'algebra', 'equation', 'slope', 'intercept', 'function', 'expression', 'counting', 'arithmetic', 'equality', 'equal', 'compare', 'build', 'model'],
+  'math-applications': ['projectile', 'vector', 'calculus', 'probability', 'plinko', 'variability', 'center'],
   
   // Chemistry Sub-categories
   'general-chemistry': ['molecule', 'atom', 'reaction', 'ph', 'acid', 'base', 'solution', 'concentration', 'molarity'],
