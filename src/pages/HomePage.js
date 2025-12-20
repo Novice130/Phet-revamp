@@ -33,7 +33,11 @@ export default function HomePage() {
             
             <!-- Sidebar Filters - PhET Style -->
             <aside class="filter-sidebar" id="filter-sidebar">
-              <!-- Subject Filter (Expanded by default) -->
+              <!-- Mobile Filter Header -->
+              <div class="mobile-filter-header">
+                <span class="mobile-filter-title">Filters</span>
+                <button class="mobile-filter-close" id="mobile-filter-close">✕</button>
+              </div>
               <div class="filter-section">
                 <button class="filter-header" data-toggle="subject-options">
                   <span>SUBJECT</span>
@@ -228,9 +232,14 @@ export default function HomePage() {
               </div>
               
               <!-- Clear Filters -->
-              <button class="clear-filters-btn" id="clear-filters">
-                Clear Filters
-              </button>
+              <div class="filter-actions">
+                <button class="clear-filters-btn" id="clear-filters">
+                  Clear Filters
+                </button>
+                <button class="apply-filters-btn" id="apply-filters">
+                  Apply Filters
+                </button>
+              </div>
             </aside>
             
             <!-- Simulations Grid -->
@@ -483,9 +492,8 @@ export default function HomePage() {
       
       /* Clear Filters Button - PhET Style */
       .clear-filters-btn {
-        width: 100%;
+        flex: 1;
         padding: 8px 16px;
-        margin-top: var(--space-4);
         font-size: 13px;
         font-weight: 500;
         color: #6366f1;
@@ -498,6 +506,69 @@ export default function HomePage() {
       
       .clear-filters-btn:hover {
         background: #f5f3ff;
+      }
+      
+      /* Filter Actions Container */
+      .filter-actions {
+        display: flex;
+        gap: var(--space-2);
+        margin-top: var(--space-4);
+      }
+      
+      /* Apply Filters Button - hidden on desktop */
+      .apply-filters-btn {
+        display: none;
+        flex: 1;
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        color: white;
+        background: linear-gradient(135deg, #d4af37 0%, #f4cf47 50%, #d4af37 100%);
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      
+      .apply-filters-btn:hover {
+        background: linear-gradient(135deg, #e5c048 0%, #fff5a0 50%, #e5c048 100%);
+        transform: translateY(-1px);
+      }
+      
+      /* Mobile Filter Header - hidden on desktop */
+      .mobile-filter-header {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: var(--space-3);
+        margin-bottom: var(--space-3);
+        border-bottom: 1px solid #e5e7eb;
+      }
+      
+      .mobile-filter-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #1a3c5e;
+      }
+      
+      .mobile-filter-close {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f3f4f6;
+        border: none;
+        border-radius: 50%;
+        font-size: 16px;
+        color: #6b7280;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      
+      .mobile-filter-close:hover {
+        background: #e5e7eb;
+        color: #374151;
       }
       
       /* Grid Header */
@@ -637,12 +708,28 @@ export default function HomePage() {
         }
         
         .filter-sidebar {
-          position: static;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
           display: none;
-          margin-bottom: var(--space-4);
+          z-index: 1000;
+          border-radius: 0;
+          overflow-y: auto;
+          padding: var(--space-4);
         }
         
         .filter-sidebar.mobile-open {
+          display: block;
+        }
+        
+        /* Show mobile-specific elements */
+        .mobile-filter-header {
+          display: flex;
+        }
+        
+        .apply-filters-btn {
           display: block;
         }
         
@@ -817,6 +904,24 @@ function setupFilters() {
     mobileToggle.addEventListener('click', () => {
       mobileToggle.classList.toggle('active');
       filterSidebar.classList.toggle('mobile-open');
+    });
+  }
+  
+  // Mobile filter close button
+  const mobileClose = document.getElementById('mobile-filter-close');
+  if (mobileClose && filterSidebar && mobileToggle) {
+    mobileClose.addEventListener('click', () => {
+      filterSidebar.classList.remove('mobile-open');
+      mobileToggle.classList.remove('active');
+    });
+  }
+  
+  // Apply filters button (closes drawer on mobile)
+  const applyBtn = document.getElementById('apply-filters');
+  if (applyBtn && filterSidebar && mobileToggle) {
+    applyBtn.addEventListener('click', () => {
+      filterSidebar.classList.remove('mobile-open');
+      mobileToggle.classList.remove('active');
     });
   }
   
